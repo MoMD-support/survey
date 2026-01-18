@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نموذج إدخال البيانات</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin-top: 30px;
+            background-color: #f5f5f5;
+        }
+        form {
+            max-width: 800px;
+            margin: 20px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+           flex-direction: row-reverse; 
+        /*flex-direction: column;*/
+       
+        }
+
+
+        label {
+            font-weight: bold;
+            width: 40%;
+            text-align: left;
+            margin-right: 15px;
+            margin-left: 0;
+        }
+        input, select {
+            width: 55%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            text-align: right;
+        }
+        input:focus, select:focus {
+            border-color: #217fa7;
+            outline: none;
+        }
+        button {
+            background-color: #217fa7;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #1a6a8d;
+        }
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        .file-upload {
+            background: #f0f7fb;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            border: 1px dashed #217fa7;
+        }
+        .file-item {
+            background: #e9f7ef;
+            padding: 8px 12px;
+            margin: 5px 0;
+            border-radius: 4px;
+            border: 1px solid #27ae60;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+        }
+        .file-remove {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .file-remove:hover {
+            background: #c0392b;
+        }
+        #message {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+        .success {
+            background-color: #255835;
+            color: #e0e9e3;
+            display: block;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            display: block;
+        }
+        .loading {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            display: block;
+        }
+        h2 {
+            color: #217fa7;
+            margin-top: 30px;
+            border-bottom: 2px solid #217fa7;
+            padding-bottom: 10px;
+        }
+        .logo {
+            margin-bottom: 20px;
+        }
+        /* أنماط جديدة لأفراد الأسرة */
+        .family-section {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+            border: 2px solid #e3f2fd;
+        }
+        .family-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #217fa7;
+        }
+        .family-member {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .member-title {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .member-fields {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+        .member-field {
+            display: flex;
+            flex-direction: column;
+            text-align: right;
+        }
+        .member-field label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #555;
+            font-size: 14px;
+            width: 100%;
+            text-align: right;
+        }
+        .member-field input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .member-notes {
+            margin-top: 10px;
+        }
+        .member-notes textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            resize: vertical;
+            min-height: 80px;
+            text-align: right;
+        }
+        .generate-btn {
+            background-color: #28a745;
+            margin-left: 10px;
+            padding: 8px 15px;
+            font-size: 14px;
+        }
+        .generate-btn:hover {
+            background-color: #218838;
+        }
+        .family-info {
+            background: #e8f4f8;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            text-align: center;
+            color: #0c5460;
+        }
+        /* تكييف أنماط الهواتف المحمولة */
+        @media (max-width: 768px) {
+            .form-group {
+                flex-direction: column;
+                align-items: flex-end;
+            }
+            .form-group label {
+                width: 100%;
+                margin-bottom: 5px;
+                text-align: right;
+            }
+            .form-group input,
+            .form-group select {
+                width: 100%;
+            }
+            .member-fields {
+                grid-template-columns: 1fr;
+            }
+            .family-header {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+
+
+        /* نافذة منبثقة */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.modal-box {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    animation: scaleIn 0.3s ease;
+}
+
+.modal-box h3 {
+    color: #217fa7;
+    margin-bottom: 10px;
+}
+
+.modal-box p {
+    margin-bottom: 20px;
+    color: #444;
+}
+
+.modal-box button {
+    background-color: #217fa7;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.modal-box button:hover {
+    background-color: #1a6a8d;
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Spinner دائري */
+.spinner-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.7);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+}
+
+.spinner {
+    width: 60px;
+    height: 60px;
+    border: 6px solid #ddd;
+    border-top: 6px solid #217fa7;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 15px;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+.spinner-overlay p {
+    font-size: 16px;
+    color: #217fa7;
+    font-weight: bold;
+}
+
+      
+
+
+    </style>
+</head>
+<body>
+    <div class="logo">
+        <img src="logo1.jpg" alt="الشعار" width="120" height="120">
+    </div>
+    <h1>نموذج إدخال البيانات</h1>
+    
+    <form id="dataForm">
+        <!-- المعلومات الأساسية -->
+        <h2>بيانات النازح</h2>
+        
+         <div class="form-group">
+            <select id="camp_name" required>
+                <option value="">اختر الاجابة</option>
+                <option value="بحركة">بحركة</option>
+                <option value="الخازر">الخازر</option>
+                 <option value="حسن شام U2">حسن شام U2</option>
+                <option value="حسن شام U3">حسن شام U3</option>
+                <option value="ديبكة">ديبكة</option>
+            </select>
+            <label for="camp_name">المخيم</label>
+        </div>
+        
+        
+       
+        <div class="form-group">
+            <input type="text" id="name" placeholder="الاسم الرباعي واللقب" required>
+            <label for="name">الاسم الرباعي واللقب</label>
+        </div>
+        <div class="form-group">
+            <input type="text" id="IDno" placeholder="رقم الهوية" required>
+            <label for="IDno">رقم الهوية</label>
+        </div>
+        
+        <div class="form-group">
+            <input type="text" id="Mname" placeholder="اسم الأم الثلاثي" required>
+            <label for="Mname">اسم الأم الثلاثي</label>
+        </div>
+        
+         <div class="form-group">
+            <input type="date" id="Dbirth" placeholder="المواليد" required>
+            <label for="Dbirth">المواليد</label>
+        </div>
+        <div class="form-group">
+            <input type="text" id="gov" placeholder="محافظة النزوح" required>
+            <label for="gov">محافظة النزوح</label>
+        </div>
+        <div class="form-group">
+            <input type="text" id="katha" placeholder="قضاء" required>
+            <label for="katha">قضاء</label>
+        </div>
+         <div class="form-group">
+            <input type="text" id="hay" placeholder="حي" required>
+            <label for="hay">حي</label>
+        </div>
+      
+        <!--  <div class="form-group">
+            <input type="text" id="tocamp" placeholder="اسم المخيم" required>
+            <label for="tocamp">الى مخيم</label>
+        </div> -->
+         <div class="form-group">
+            <input type="date" id="Ddate" placeholder="تاريخ النزوح" required>
+            <label for="Ddate">تاريخ النزوح</label>
+        </div>
+         <div class="form-group">
+            <select id="R_type" required>
+                <option value="">اختر الاجابة</option>
+                <option value="خيمة">خيمة</option>
+                <option value="كرفان">كرفان</option>
+                 <option value="بناء ثابت">بناء ثابت</option>
+            </select>
+            <label for="R_type">نوع السكن</label>
+        </div>
+
+
+        <div class="form-group">
+            <input type="text" id="R_No" placeholder="رقم السكن" required>
+            <label for="R_No">رقم السكن</label>
+        </div>
+        <div class="form-group">
+            <input type="text" id="sector" placeholder="القاطع" required>
+            <label for="sector">القاطع</label>
+        </div>
+        <div class="form-group">
+            <input type="text" id="mob" placeholder="رقم الهاتف" required>
+            <label for="mob">رقم الموبايل </label>
+        </div>
+
+        <div class="form-group">
+            <select id="F_database" required>
+                <option value="">اختر الاجابة</option>
+                <option value="نعم">نعم</option>
+                <option value="لا">لا</option>
+            </select>
+            <label for="F_database">هل رب الاسرة مسجل بقاعدة بيانات الوزارة</label>
+        </div>
+        <div class="form-group">
+            <input type="text" id="F_code" placeholder="اذا الجواب نعم:رقم الكود" >
+            <label for="F_code">رقم الكود</label>
+        </div>
+        <div class="form-group">
+            <input type="number" id="familyNo" placeholder="عدد الافراد" min="1" max="50" required>
+            <label for="familyNo">عدد افراد العائلة</label>
+            <button type="button" onclick="generateMemberForms()" class="generate-btn">إنشاء نموذج أفراد الأسرة</button>
+        </div>
+
+        <!-- قسم أفراد الأسرة الديناميكي -->
+        <div class="family-section" id="familySection" style="display: none;">
+            <div class="family-header">
+                <h2 style="margin: 0; color: #217fa7;">معلومات أفراد الأسرة</h2>
+                <div class="family-info">
+                    <span id="memberCount">0</span> فرد تم إنشاء نماذجهم
+                </div>
+            </div>
+            <div id="membersContainer"></div>
+        </div>
+
+         <div class="form-group">
+            <select id="h_resp" required>
+                <option value="">اختر الاجابة</option>
+                <option value="نعم">نعم</option>
+                <option value="لا">لا</option>
+            </select>
+            <label for="h_resp">هل الزوج هو رب الاسرة</label>
+        </div>
+
+         <div class="form-group">
+            <select id="h_state" >
+                <option value="">اختر الاجابة</option>
+                <option value="متوفي">متوفي</option>
+                <option value="مسجون">مسجون</option>
+                <option value="مفقود">مفقود</option>
+                <option value="مطلق">مطلق</option>
+            </select>
+            <label for="h_state">اذا كان الجواب لا</label>
+        </div>
+        <div class="form-group">
+            <input type="text" id="dissionNo" placeholder="رقم قرار الحكم" >
+            <label for="dissionNo">اذا كان محكوم رقم قرار الحكم</label>
+        </div>
+        <div class="form-group">
+            <input type="text" id="deadNo" placeholder="رقم شهادة الوفاة" >
+            <label for="deadNo">اذا كان متوفي رقم شهادة الوفاة</label>
+        </div>
+        <div class="form-group">
+            <input type="text" id="divorceNo" placeholder=" قرار الطلاق" >
+            <label for="divorceNo">اذا كان مطلق رقم قرار الطلاق</label>
+        </div>
+        <div class="form-group">
+            <input type="text" id="missingNo" placeholder="حجة الفقدان" >
+            <label for="missingNo">اذا كان مفقود حجة الفقدان </label>
+        </div>
+        <div class="form-group">
+            <select id="isis" required>
+                <option value="">اختر الاجابة</option>
+                <option value="نعم">نعم</option>
+                <option value="لا">لا</option>
+            </select>
+            <label for="isis">هل احد افراد العائلة ينتمي لتنظيم داعش</label>
+        </div>
+        <p>اذا كان الجواب نعم</p>
+          <div class="form-group">
+             <input type="text" id="isisName" placeholder="اسم الشخص" >
+            <label for="isisName">اسم الشخص</label>
+            <input type="text" id="isisMname" placeholder="اسم الام" >
+            <label for="isisMname">اسم الام</label>
+          
+            <!-- <label>اذا كان الجواب نعم</label> -->
+        </div>
+        <div class="form-group">
+            <select id="emp" required>
+                <option value="">اختر الاجابة</option>
+                <option value="موظف حكومي">موظف حكومي</option>
+                <option value="متقاعد">متقاعد</option>
+            </select>
+            <label for="emp">هل رب الاسرة :</label>
+        </div>
+         
+        <div class="form-group">
+            <select id="disabl" required>
+                <option value="">اختر الاجابة</option>
+                <option value="نعم">نعم</option>
+                <option value="لا">لا</option>
+            </select>
+            <label for="disabl">هل يوجد اشخاص من ذووي الاعاقة</label>
+        </div>
+         <div class="form-group">
+            <input type="number" id="disNo" placeholder=" عدد المعاقين" min="0" >
+            <label for="disNo">عدد المعاقين</label>
+        </div>
+         <div class="form-group">
+            <select id="socil_sal" required>
+                <option value="">اختر الاجابة</option>
+                <option value="نعم">نعم</option>
+                <option value="لا">لا</option>
+            </select>
+            <label for="socil_sal">هل مشمول براتب الرعاية الاجتماعية</label>
+        </div>
+         <div class="form-group">
+            <select id="taweeth" required>
+                <option value="">اختر الاجابة</option>
+                <option value="نعم">نعم</option>
+                <option value="لا">لا</option>
+            </select>
+            <label for="taweeth">هل رب الاسرة استلم تعويض من جهات حكومية</label>
+        </div>
+
+        <div class="form-group">
+            <input type="text" id="taw_from" placeholder="جهة التعويض" >
+            <label for="taw_from">اذا كان الجواب نعم:اذكر جهة التعويض</label>
+        </div>
+         <div class="form-group">
+            <select id="h_owner" required>
+                <option value="">اختر الاجابة</option>
+                <option value="نعم">نعم</option>
+                <option value="لا">لا</option>
+            </select>
+            <label for="h_owner">هل لدى رب الاسرة عقار في محافظته الاصلية</label>
+        </div>
+        <div class="form-group">
+            <input type="text" id="h_kind" placeholder="نوع العقار" >
+            <label for="h_kind">اذا كان الجواب نعم:اذكر نوع العقار</label>
+        </div>
+        <div class="form-group">
+            <select id="missing_doc" required>
+                <option value="">اختر الاجابة</option>
+                <option value="نعم">نعم</option>
+                <option value="لا">لا</option>
+            </select>
+            <label for="missing_doc">هل لدى احد افراد العائلة نقص في المستمسكات الثبوتية</label>
+        </div>
+          <label>اذا كان الجواب نعم</label>
+         <div class="form-group"> 
+           
+            <br> 
+            <textarea type="text" id="missing_name" rows="3" cols="40" placeholder="اسم الفرد" ></textarea>
+             <label for="missing_name">اذكر اسم الفرد</label>  
+             <br>
+            <textarea type="text" id="missing_kind" rows="3" cols="40" placeholder="نوع المستمسك" ></textarea>
+            <label for="missing_kind">نوع المستمسك</label>
+             
+            
+        </div>
+        <div class="form-group">
+            <select id="wish" required>
+                <option value="">اختر الاجابة</option>
+                <option value="الاستقرار">الاستقرار</option>
+                <option value="العودة">العودة</option>
+                <option value="الانتقال الى محافظة اخرى">الانتقال الى محافظة اخرى</option>
+            </select>
+            <label for="wish">هل يرغب النازح في :</label>
+        </div>
+
+        <!-- رفع الملفات -->
+        <div class="file-upload">
+            <label for="file-upload">رفع الوثائق المطلوبة (PDF, JPG,JPEG, PNG)</label>
+          <!--  <input type="file" id="file-upload" accept=".pdf,.jpg,.png,.jpeg" multiple>  -->
+            <input 
+        type="file" 
+        id="file-upload" 
+         accept=".pdf,.jpg,.jpeg,.png,image/*"
+        capture
+        multiple
+        >
+
+
+            <small>يمكنك رفع أكثر من ملف بحد أقصى 10MB لكل ملف</small>
+            <div id="file-list" style="margin-top: 10px; text-align: right;"></div>
+        </div>
+        
+        <button type="submit" id="submitBtn">إرسال البيانات</button>
+       
+    </form>
+    
+    <div id="message"></div>
+    
+
+ 
+    <script>
+        // متغيرات عامة
+        let selectedFiles = [];
+        let familyMembersData = [];
+
+        // إضافة مستمع لتغيير الملفات
+        document.getElementById('file-upload').addEventListener('change', function(event) {
+            const files = Array.from(event.target.files);
+            
+            // إضافة الملفات الجديدة إلى القائمة
+            files.forEach(file => {
+                // التحقق من حجم الملف
+                if (file.size > 10 * 1024 * 1024) {
+                    alert(`الملف "${file.name}" 1كبير جداً. الحد الأقصى 0MB`);
+                    return;
+                }
+                
+                // التحقق من عدم وجود الملف مسبقاً
+                if (!selectedFiles.find(f => f.name === file.name && f.size === file.size)) {
+                    selectedFiles.push(file);
+                }
+            });
+            
+            // تحديث عرض الملفات
+            updateFileList();
+            
+            // إعادة تعيين input لإمكانية اختيار نفس الملفات مرة أخرى
+            event.target.value = '';
+        });
+
+        // دالة إنشاء نماذج أفراد الأسرة
+        function generateMemberForms() {
+            const familyNo = parseInt(document.getElementById('familyNo').value);
+            const familySection = document.getElementById('familySection');
+            const membersContainer = document.getElementById('membersContainer');
+            const memberCount = document.getElementById('memberCount');
+            
+            if (!familyNo || familyNo < 1 || familyNo > 50) {
+                alert('الرجاء إدخال عدد صحيح بين 1 و 50 لأفراد الأسرة');
+                return;
+            }
+            
+            // إظهار قسم أفراد الأسرة
+            familySection.style.display = 'block';
+            
+            // مسح المحتوى السابق
+            membersContainer.innerHTML = '';
+            
+            // إنشاء نماذج لأفراد الأسرة
+            for (let i = 1; i <= familyNo; i++) {
+                const memberDiv = document.createElement('div');
+                memberDiv.className = 'family-member';
+                memberDiv.innerHTML = `
+                    <div class="member-title">
+                        <strong>فرد الأسرة ${i}</strong>
+                        <span style="font-size: 12px; color: #666;">مطلوب</span>
+                    </div>
+                    <div class="member-fields">
+                        <div class="member-field">
+                            <label for="memberName${i}">الاسم الثلاثي</label>
+                            <input type="text" id="memberName${i}" name="memberName${i}" placeholder="اسم الفرد" required>
+                        </div>
+                        <div class="member-field">
+                            <label for="memberBirthYear${i}">سنة التولد</label>
+                            <input type="number" id="memberBirthYear${i}" name="memberBirthYear${i}" 
+                                   min="1900" max="2024" placeholder="مثال: 1990" required>
+                        </div>
+                        <div class="member-field">
+                            <label for="memberRelation${i}">العلاقة برب الأسرة</label>
+                            <select id="memberRelation${i}" name="memberRelation${i}" required>
+                                <option value="">اختر العلاقة</option>
+                                <option value="زوج/زوجة">زوج/زوجة</option>
+                                <option value="ابن">ابن</option>
+                                <option value="ابنة">ابنة</option>
+                                <option value="أب">أب</option>
+                                <option value="أم">أم</option>
+                                <option value="أخ">أخ</option>
+                                <option value="أخت">أخت</option>
+                                <option value="جد">جد</option>
+                                <option value="جدة">جدة</option>
+                                <option value="حفيد">حفيد</option>
+                                <option value="حفيدة">حفيدة</option>
+                                <option value="آخر">آخر</option>
+                            </select>
+                        </div>
+                        <div class="member-field">
+                            <label for="memberMotherName${i}">اسم الأم</label>
+                            <input type="text" id="memberMotherName${i}" name="memberMotherName${i}" placeholder="اسم الأم الثلاثي" required>
+                        </div>
+                    </div>
+                    <div class="member-notes">
+                        <label for="memberNotes${i}">ملاحظات</label>
+                        <textarea id="memberNotes${i}" name="memberNotes${i}" 
+                                  placeholder="أي ملاحظات إضافية عن الفرد..." rows="2"></textarea>
+                    </div>
+                `;
+                membersContainer.appendChild(memberDiv);
+            }
+            
+            // تحديث العداد
+            memberCount.textContent = familyNo;
+            
+            // إضافة رسالة نجاح
+            showMessage(`تم إنشاء ${familyNo} نموذج لأفراد الأسرة`, 'success');
+        }
+
+        // دالة جمع بيانات أفراد الأسرة
+        function collectFamilyMembersData() {
+            const familyNo = parseInt(document.getElementById('familyNo').value);
+            const membersData = [];
+            
+            for (let i = 1; i <= familyNo; i++) {
+                const name = document.getElementById(`memberName${i}`)?.value;
+                const birthYear = document.getElementById(`memberBirthYear${i}`)?.value;
+                const relation = document.getElementById(`memberRelation${i}`)?.value;
+                const motherName = document.getElementById(`memberMotherName${i}`)?.value;
+                const notes = document.getElementById(`memberNotes${i}`)?.value;
+                
+                // التحقق من الحقول المطلوبة
+                if (!name || !birthYear || !relation || !motherName) {
+                    throw new Error(`الرجاء ملء جميع الحقول المطلوبة للفرد ${i}`);
+                }
+                
+                membersData.push({
+                    memberNumber: i,
+                    name: name,
+                    birthYear: birthYear,
+                    relation: relation,
+                    motherName: motherName,
+                    notes: notes || ''
+                });
+            }
+            
+            return membersData;
+        }
+
+        // دالة تحديث عرض الملفات
+        function updateFileList() {
+            const fileListDiv = document.getElementById('file-list');
+            fileListDiv.innerHTML = '';
+            
+            if (selectedFiles.length === 0) {
+                fileListDiv.innerHTML = '<p style="color: #666; font-size: 14px;">لم يتم اختيار أي ملفات</p>';
+                return;
+            }
+            
+            selectedFiles.forEach((file, index) => {
+                const fileItem = document.createElement('div');
+                fileItem.className = 'file-item';
+                fileItem.innerHTML = `
+                    <span>${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)</span>
+                    <button type="button" class="file-remove" onclick="removeFile(${index})">حذف</button>
+                `;
+                fileListDiv.appendChild(fileItem);
+            });
+        }
+
+        // دالة حذف ملف
+        function removeFile(index) {
+            selectedFiles.splice(index, 1);
+            updateFileList();
+        }
+
+        // دالة عرض الرسائل
+        function showMessage(text, type) {
+            const messageEl = document.getElementById('message');
+            messageEl.textContent = text;
+            messageEl.className = type;
+            messageEl.style.display = 'block';
+            
+            setTimeout(() => {
+                messageEl.style.display = 'none';
+            }, 5000);
+        }
+
+        // دالة تحويل الملف لـ base64
+        function toBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => {
+                    const base64 = reader.result.split(',')[1];
+                    resolve(base64);
+                };
+                reader.onerror = error => reject(error);
+            });
+        }
+
+        // معالج إرسال النموذج
+        document.getElementById("dataForm").addEventListener("submit", async function(event) {
+            event.preventDefault();
+            document.getElementById("loadingSpinner").style.display = "flex";
+
+
+            const submitBtn = document.querySelector("#submitBtn");
+            const messageEl = document.getElementById("message");
+            
+            // تعطيل الزر وإظهار رسالة التحميل
+            submitBtn.disabled = true;
+            submitBtn.textContent = "جاري الإرسال...";
+            messageEl.textContent = "جاري معالجة البيانات...";
+            messageEl.className = "loading";
+            messageEl.style.display = "block";
+            
+            try {
+                // جمع بيانات أفراد الأسرة
+                const familyNo = parseInt(document.getElementById('familyNo').value);
+                if (familyNo > 0) {
+                    familyMembersData = collectFamilyMembersData();
+                }
+
+                // تحضير البيانات الأساسية
+                const formData = {
+                    // البيانات الشخصية الأساسية
+                    camp_name: document.getElementById("camp_name").value.trim(),
+                    name: document.getElementById("name").value.trim(),
+                    Mname: document.getElementById("Mname").value.trim(),
+                    phone: document.getElementById("mob").value.trim(),
+                    IDno: document.getElementById("IDno").value.trim(),
+                    Dbirth: document.getElementById("Dbirth").value,
+                    gov: document.getElementById("gov").value.trim(),
+                    katha: document.getElementById("katha").value.trim(),
+                    hay: document.getElementById("hay").value.trim(),
+                    //tocamp: document.getElementById("tocamp").value.trim(),
+                    Ddate: document.getElementById("Ddate").value,
+                    R_type: document.getElementById("R_type").value,
+                    R_No: document.getElementById("R_No").value.trim(),
+                    sector: document.getElementById("sector").value.trim(),
+                    F_database: document.getElementById("F_database").value,
+                    F_code: document.getElementById("F_code").value.trim(),
+                    familyNo: familyNo,
+                    h_resp: document.getElementById("h_resp").value,
+                    h_state: document.getElementById("h_state").value,
+                    dissionNo: document.getElementById("dissionNo").value.trim(),
+                    deadNo: document.getElementById("deadNo").value.trim(),
+                    divorceNo: document.getElementById("divorceNo").value.trim(),
+                    missingNo: document.getElementById("missingNo").value.trim(),
+                    isis: document.getElementById("isis").value,
+                    isisName: document.getElementById("isisName").value.trim(),
+                    isisMname: document.getElementById("isisMname").value.trim(),
+                    emp: document.getElementById("emp").value,
+                    disabl: document.getElementById("disabl").value,
+                    disNo: document.getElementById("disNo").value.trim(),
+                    socil_sal: document.getElementById("socil_sal").value,
+                    taweeth: document.getElementById("taweeth").value,
+                    taw_from: document.getElementById("taw_from").value.trim(),
+                    h_owner: document.getElementById("h_owner").value,
+                    h_kind: document.getElementById("h_kind").value.trim(),
+                    missing_doc: document.getElementById("missing_doc").value,
+                    missing_kind: document.getElementById("missing_kind").value.trim(),
+                    missing_name: document.getElementById("missing_name").value.trim(),
+                    wish: document.getElementById("wish").value,
+                    
+                    // بيانات أفراد الأسرة
+                    familyMembers: familyMembersData
+                };
+
+                // التحقق من البيانات المطلوبة الأساسية
+                const requiredFields = ['name', 'Mname', 'IDno', 'familyNo'];
+                for (let field of requiredFields) {
+                    if (!formData[field]) {
+                        throw new Error(`الحقل "${field}" مطلوب`);
+                    }
+                }
+
+                // التحقق من بيانات أفراد الأسرة إذا كان هناك أفراد
+                if (familyNo > 0 && (!familyMembersData || familyMembersData.length !== familyNo)) {
+                    throw new Error('الرجاء ملء بيانات جميع أفراد الأسرة');
+                }
+
+                // معالجة الملفات المتعددة
+                if (selectedFiles.length > 0) {
+                    formData.files = [];
+                    
+                    for (let file of selectedFiles) {
+                        const fileData = await toBase64(file);
+                        formData.files.push({
+                            data: fileData,
+                            name: file.name,
+                            type: file.type,
+                            size: file.size
+                        });
+                    }
+                }
+
+                // رابط Google Apps Script
+                const scriptURL = 'https://script.google.com/macros/s/AKfycbxCk0hrHEhEfa7xC7Sh5rRVF2rAjW3GzKCjtSX5dnLgsw89FFL6In_peWhAH6Fu-_fF/exec';
+
+                // إرسال البيانات
+                const response = await fetch(scriptURL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                // عرض رسالة النجاح
+               // messageEl.textContent = "تم إرسال البيانات بنجاح!";
+               // messageEl.className = "success";
+               document.getElementById("loadingSpinner").style.display = "none";
+
+               showSuccessModal();
+
+                // إعادة تعيين النموذج
+                document.getElementById("dataForm").reset();
+                selectedFiles = [];
+                familyMembersData = [];
+                document.getElementById("familySection").style.display = "none";
+                document.getElementById("membersContainer").innerHTML = "";
+                updateFileList();
+
+            } catch (error) {
+                document.getElementById("loadingSpinner").style.display = "none";
+                console.error("Error:", error);
+                messageEl.textContent = `خطأ: ${error.message}`;
+                messageEl.className = "error";
+            } finally {
+                // إعادة تفعيل الزر
+                submitBtn.disabled = false;
+                submitBtn.textContent = "إرسال البيانات";
+            }
+        });
+
+        // تهيئة عرض الملفات عند تحميل الصفحة
+        updateFileList();
+
+
+
+        function showSuccessModal() {
+    document.getElementById("successModal").style.display = "flex";
+}
+
+function resetFormAndClose() {
+    document.getElementById("successModal").style.display = "none";
+    document.getElementById("loadingSpinner").style.display = "none";
+
+ const messageEl = document.getElementById("message");
+    messageEl.style.display = "none";
+    messageEl.textContent = "";
+    messageEl.className = "";
+
+    document.getElementById("dataForm").reset();
+    selectedFiles = [];
+    familyMembersData = [];
+    document.getElementById("familySection").style.display = "none";
+    document.getElementById("membersContainer").innerHTML = "";
+    updateFileList();
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+
+    </script>
+
+
+<!-- نافذة النجاح -->
+<div id="successModal" class="modal-overlay">
+    <div class="modal-box">
+        <h3>✅ تم إرسال البيانات بنجاح</h3>
+        <p>يمكنك الآن إدخال بيانات جديدة</p>
+        <button onclick="resetFormAndClose()">إدخال بيانات جديدة</button>
+    </div>
+</div>
+
+<!-- Spinner تحميل -->
+<div id="loadingSpinner" class="spinner-overlay">
+    <div class="spinner"></div>
+    <p>جاري معالجة البيانات...</p>
+</div>
+
+
+</body>
+</html>
