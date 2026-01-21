@@ -24,11 +24,8 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-           flex-direction: row-reverse; 
-        /*flex-direction: column;*/
-       
+            flex-direction: row-reverse;
         }
-
 
         label {
             font-weight: bold;
@@ -37,7 +34,7 @@
             margin-right: 15px;
             margin-left: 0;
         }
-        input, select {
+        input, select, textarea {
             width: 55%;
             padding: 12px;
             border: 1px solid #ddd;
@@ -45,7 +42,7 @@
             font-size: 16px;
             text-align: right;
         }
-        input:focus, select:focus {
+        input:focus, select:focus, textarea:focus {
             border-color: #217fa7;
             outline: none;
         }
@@ -228,7 +225,8 @@
                 text-align: right;
             }
             .form-group input,
-            .form-group select {
+            .form-group select,
+            .form-group textarea {
                 width: 100%;
             }
             .member-fields {
@@ -238,110 +236,195 @@
                 flex-direction: column;
                 gap: 10px;
             }
+            .photo-options {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .photo-options button {
+                width: 100%;
+            }
         }
 
-
-
         /* نافذة منبثقة */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-}
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
 
-.modal-box {
-    background: #ffffff;
-    padding: 30px;
-    border-radius: 12px;
-    width: 90%;
-    max-width: 400px;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    animation: scaleIn 0.3s ease;
-}
+        .modal-box {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            animation: scaleIn 0.3s ease;
+        }
 
-.modal-box h3 {
-    color: #217fa7;
-    margin-bottom: 10px;
-}
+        .modal-box h3 {
+            color: #217fa7;
+            margin-bottom: 10px;
+        }
 
-.modal-box p {
-    margin-bottom: 20px;
-    color: #444;
-}
+        .modal-box p {
+            margin-bottom: 20px;
+            color: #444;
+        }
 
-.modal-box button {
-    background-color: #217fa7;
-    color: white;
-    border: none;
-    padding: 10px 25px;
-    font-size: 16px;
-    border-radius: 6px;
-    cursor: pointer;
-}
+        .modal-box button {
+            background-color: #217fa7;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
 
-.modal-box button:hover {
-    background-color: #1a6a8d;
-}
+        .modal-box button:hover {
+            background-color: #1a6a8d;
+        }
 
-@keyframes scaleIn {
-    from {
-        transform: scale(0.8);
-        opacity: 0;
-    }
-    to {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
+        @keyframes scaleIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
 
-/* Spinner دائري */
-.spinner-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255,255,255,0.7);
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    z-index: 10000;
-}
+        /* Spinner دائري */
+        .spinner-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.7);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+        }
 
-.spinner {
-    width: 60px;
-    height: 60px;
-    border: 6px solid #ddd;
-    border-top: 6px solid #217fa7;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    margin-bottom: 15px;
-}
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 6px solid #ddd;
+            border-top: 6px solid #217fa7;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 15px;
+        }
 
-@keyframes spin {
-    from { transform: rotate(0deg); }
-    to   { transform: rotate(360deg); }
-}
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to   { transform: rotate(360deg); }
+        }
 
-.spinner-overlay p {
-    font-size: 16px;
-    color: #217fa7;
-    font-weight: bold;
-}
+        .spinner-overlay p {
+            font-size: 16px;
+            color: #217fa7;
+            font-weight: bold;
+        }
 
-      
-
+        /* أنماط جديدة للصورة الشخصية */
+        .photo-preview-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .photo-preview {
+            width: 220px;
+            height: 180px;
+            border: 2px solid #217fa7;
+            border-radius: 8px;
+            object-fit: cover;
+            margin: 10px auto;
+            display: block;
+        }
+        
+        .photo-placeholder {
+            width: 220px;
+            height: 180px;
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 10px auto;
+            background-color: #f9f9f9;
+            color: #666;
+        }
+        
+        .photo-placeholder i {
+            font-size: 48px;
+            margin-bottom: 10px;
+            color: #aaa;
+        }
+        
+        .photo-options {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .photo-btn {
+            background-color: #28a745;
+            padding: 10px 20px;
+            font-size: 14px;
+        }
+        
+        .photo-btn:hover {
+            background-color: #218838;
+        }
+        
+        .photo-btn-secondary {
+            background-color: #6c757d;
+        }
+        
+        .photo-btn-secondary:hover {
+            background-color: #5a6268;
+        }
+        
+        .photo-required {
+            color: #dc3545;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        
+        /* كاميرا مباشرة - للحواسب فقط */
+        .camera-live {
+            display: none;
+        }
+        
+        .camera-active .camera-live {
+            display: block;
+        }
+        
+        .camera-active .photo-preview-container {
+            display: none;
+        }
 
     </style>
+    <!-- أيقونات -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div class="logo">
@@ -353,20 +436,18 @@
         <!-- المعلومات الأساسية -->
         <h2>بيانات النازح</h2>
         
-         <div class="form-group">
+        <div class="form-group">
             <select id="camp_name" required>
                 <option value="">اختر الاجابة</option>
                 <option value="بحركة">بحركة</option>
                 <option value="الخازر">الخازر</option>
-                 <option value="حسن شام U2">حسن شام U2</option>
+                <option value="حسن شام U2">حسن شام U2</option>
                 <option value="حسن شام U3">حسن شام U3</option>
                 <option value="ديبكة">ديبكة</option>
             </select>
             <label for="camp_name">المخيم</label>
         </div>
         
-        
-       
         <div class="form-group">
             <input type="text" id="name" placeholder="الاسم الرباعي واللقب" required>
             <label for="name">الاسم الرباعي واللقب</label>
@@ -381,7 +462,7 @@
             <label for="Mname">اسم الأم الثلاثي</label>
         </div>
         
-         <div class="form-group">
+        <div class="form-group">
             <input type="date" id="Dbirth" placeholder="المواليد" required>
             <label for="Dbirth">المواليد</label>
         </div>
@@ -393,29 +474,24 @@
             <input type="text" id="katha" placeholder="قضاء" required>
             <label for="katha">قضاء</label>
         </div>
-         <div class="form-group">
+        <div class="form-group">
             <input type="text" id="hay" placeholder="حي" required>
             <label for="hay">حي</label>
         </div>
-      
-        <!--  <div class="form-group">
-            <input type="text" id="tocamp" placeholder="اسم المخيم" required>
-            <label for="tocamp">الى مخيم</label>
-        </div> -->
-         <div class="form-group">
+        
+        <div class="form-group">
             <input type="date" id="Ddate" placeholder="تاريخ النزوح" required>
             <label for="Ddate">تاريخ النزوح</label>
         </div>
-         <div class="form-group">
+        <div class="form-group">
             <select id="R_type" required>
                 <option value="">اختر الاجابة</option>
                 <option value="خيمة">خيمة</option>
                 <option value="كرفان">كرفان</option>
-                 <option value="بناء ثابت">بناء ثابت</option>
+                <option value="بناء ثابت">بناء ثابت</option>
             </select>
             <label for="R_type">نوع السكن</label>
         </div>
-
 
         <div class="form-group">
             <input type="text" id="R_No" placeholder="رقم السكن" required>
@@ -427,7 +503,7 @@
         </div>
         <div class="form-group">
             <input type="text" id="mob" placeholder="رقم الهاتف" required>
-            <label for="mob">رقم الموبايل </label>
+            <label for="mob">رقم الموبايل</label>
         </div>
 
         <div class="form-group">
@@ -439,7 +515,7 @@
             <label for="F_database">هل رب الاسرة مسجل بقاعدة بيانات الوزارة</label>
         </div>
         <div class="form-group">
-            <input type="text" id="F_code" placeholder="اذا الجواب نعم:رقم الكود" >
+            <input type="text" id="F_code" placeholder="اذا الجواب نعم:رقم الكود">
             <label for="F_code">رقم الكود</label>
         </div>
         <div class="form-group">
@@ -459,7 +535,7 @@
             <div id="membersContainer"></div>
         </div>
 
-         <div class="form-group">
+        <div class="form-group">
             <select id="h_resp" required>
                 <option value="">اختر الاجابة</option>
                 <option value="نعم">نعم</option>
@@ -468,8 +544,8 @@
             <label for="h_resp">هل الزوج هو رب الاسرة</label>
         </div>
 
-         <div class="form-group">
-            <select id="h_state" >
+        <div class="form-group">
+            <select id="h_state">
                 <option value="">اختر الاجابة</option>
                 <option value="متوفي">متوفي</option>
                 <option value="مسجون">مسجون</option>
@@ -479,20 +555,20 @@
             <label for="h_state">اذا كان الجواب لا</label>
         </div>
         <div class="form-group">
-            <input type="text" id="dissionNo" placeholder="رقم قرار الحكم" >
+            <input type="text" id="dissionNo" placeholder="رقم قرار الحكم">
             <label for="dissionNo">اذا كان محكوم رقم قرار الحكم</label>
         </div>
         <div class="form-group">
-            <input type="text" id="deadNo" placeholder="رقم شهادة الوفاة" >
+            <input type="text" id="deadNo" placeholder="رقم شهادة الوفاة">
             <label for="deadNo">اذا كان متوفي رقم شهادة الوفاة</label>
         </div>
         <div class="form-group">
-            <input type="text" id="divorceNo" placeholder=" قرار الطلاق" >
+            <input type="text" id="divorceNo" placeholder="قرار الطلاق">
             <label for="divorceNo">اذا كان مطلق رقم قرار الطلاق</label>
         </div>
         <div class="form-group">
-            <input type="text" id="missingNo" placeholder="حجة الفقدان" >
-            <label for="missingNo">اذا كان مفقود حجة الفقدان </label>
+            <input type="text" id="missingNo" placeholder="حجة الفقدان">
+            <label for="missingNo">اذا كان مفقود حجة الفقدان</label>
         </div>
         <div class="form-group">
             <select id="isis" required>
@@ -503,23 +579,22 @@
             <label for="isis">هل احد افراد العائلة ينتمي لتنظيم داعش</label>
         </div>
         <p>اذا كان الجواب نعم</p>
-          <div class="form-group">
-             <input type="text" id="isisName" placeholder="اسم الشخص" >
+        <div class="form-group">
+            <input type="text" id="isisName" placeholder="اسم الشخص">
             <label for="isisName">اسم الشخص</label>
-            <input type="text" id="isisMname" placeholder="اسم الام" >
+            <input type="text" id="isisMname" placeholder="اسم الام">
             <label for="isisMname">اسم الام</label>
-          
-            <!-- <label>اذا كان الجواب نعم</label> -->
         </div>
         <div class="form-group">
             <select id="emp" required>
                 <option value="">اختر الاجابة</option>
                 <option value="موظف حكومي">موظف حكومي</option>
                 <option value="متقاعد">متقاعد</option>
+                <option value="كاسب">كاسب</option>
             </select>
             <label for="emp">هل رب الاسرة :</label>
         </div>
-         
+        
         <div class="form-group">
             <select id="disabl" required>
                 <option value="">اختر الاجابة</option>
@@ -528,11 +603,11 @@
             </select>
             <label for="disabl">هل يوجد اشخاص من ذووي الاعاقة</label>
         </div>
-         <div class="form-group">
-            <input type="number" id="disNo" placeholder=" عدد المعاقين" min="0" >
+        <div class="form-group">
+            <input type="number" id="disNo" placeholder="عدد المعاقين" min="0">
             <label for="disNo">عدد المعاقين</label>
         </div>
-         <div class="form-group">
+        <div class="form-group">
             <select id="socil_sal" required>
                 <option value="">اختر الاجابة</option>
                 <option value="نعم">نعم</option>
@@ -540,7 +615,7 @@
             </select>
             <label for="socil_sal">هل مشمول براتب الرعاية الاجتماعية</label>
         </div>
-         <div class="form-group">
+        <div class="form-group">
             <select id="taweeth" required>
                 <option value="">اختر الاجابة</option>
                 <option value="نعم">نعم</option>
@@ -550,10 +625,10 @@
         </div>
 
         <div class="form-group">
-            <input type="text" id="taw_from" placeholder="جهة التعويض" >
+            <input type="text" id="taw_from" placeholder="جهة التعويض">
             <label for="taw_from">اذا كان الجواب نعم:اذكر جهة التعويض</label>
         </div>
-         <div class="form-group">
+        <div class="form-group">
             <select id="h_owner" required>
                 <option value="">اختر الاجابة</option>
                 <option value="نعم">نعم</option>
@@ -562,7 +637,7 @@
             <label for="h_owner">هل لدى رب الاسرة عقار في محافظته الاصلية</label>
         </div>
         <div class="form-group">
-            <input type="text" id="h_kind" placeholder="نوع العقار" >
+            <input type="text" id="h_kind" placeholder="نوع العقار">
             <label for="h_kind">اذا كان الجواب نعم:اذكر نوع العقار</label>
         </div>
         <div class="form-group">
@@ -573,17 +648,13 @@
             </select>
             <label for="missing_doc">هل لدى احد افراد العائلة نقص في المستمسكات الثبوتية</label>
         </div>
-          <label>اذا كان الجواب نعم</label>
-         <div class="form-group"> 
-           
-            <br> 
-            <textarea type="text" id="missing_name" rows="3" cols="40" placeholder="اسم الفرد" ></textarea>
-             <label for="missing_name">اذكر اسم الفرد</label>  
-             <br>
-            <textarea type="text" id="missing_kind" rows="3" cols="40" placeholder="نوع المستمسك" ></textarea>
+        <label>اذا كان الجواب نعم</label>
+        <div class="form-group">
+            <textarea id="missing_name" rows="3" cols="40" placeholder="اسم الفرد"></textarea>
+            <label for="missing_name">اذكر اسم الفرد</label>
+            <br>
+            <textarea id="missing_kind" rows="3" cols="40" placeholder="نوع المستمسك"></textarea>
             <label for="missing_kind">نوع المستمسك</label>
-             
-            
         </div>
         <div class="form-group">
             <select id="wish" required>
@@ -595,62 +666,309 @@
             <label for="wish">هل يرغب النازح في :</label>
         </div>
 
+        <h2>الصورة الشخصية <span class="photo-required">* إلزامي</span></h2>
+
+        <!-- قسم الصورة الشخصية المحدث -->
+        <div class="form-group" style="flex-direction: column; align-items: center;">
+            <!-- عرض الصورة الملتقطة -->
+            <div class="photo-preview-container" id="photoPreviewContainer">
+                <div id="photoPlaceholder" class="photo-placeholder">
+                    <i class="fas fa-camera"></i>
+                    <span>لم يتم اختيار صورة</span>
+                </div>
+                <img id="photoPreview" class="photo-preview" style="display: none;">
+            </div>
+
+            <!-- الكاميرا المباشرة (للحاسب فقط) -->
+            <div class="camera-live" id="cameraLive">
+                <video id="camera" width="220" height="180" autoplay playsinline style="border-radius:8px; border:1px solid #ccc;"></video>
+                <canvas id="snapshot" width="220" height="180" style="display:none;"></canvas>
+            </div>
+
+            <!-- أزرار التحكم -->
+            <div class="photo-options">
+                <button type="button" onclick="capturePhoto()" class="photo-btn">
+                    <i class="fas fa-camera"></i> التقاط صورة
+                </button>
+                   <button type="button" onclick="tryDirectCamera()" class="photo-btn photo-btn-secondary" id="directCameraBtn" style="display: none;">
+                    <i class="fas fa-video"></i> كاميرا مباشرة
+                </button>
+                <button type="button" onclick="clearPhoto()" class="photo-btn photo-btn-secondary" id="clearPhotoBtn" style="display: none;">
+                    <i class="fas fa-trash"></i> إزالة الصورة
+                </button>
+            </div>
+            
+            <div id="cameraInstructions" style="margin-top: 10px; color: #666; font-size: 14px;">
+                <i class="fas fa-info-circle"></i> اضغط "التقاط صورة" لفتح كاميرا الهاتف
+            </div>
+        </div>
+
         <!-- رفع الملفات -->
         <div class="file-upload">
-            <label for="file-upload">رفع الوثائق المطلوبة (PDF, JPG,JPEG, PNG)</label>
-          <!--  <input type="file" id="file-upload" accept=".pdf,.jpg,.png,.jpeg" multiple>  -->
+            <label for="file-upload">رفع الوثائق المطلوبة (PDF, JPG, JPEG, PNG)</label>
             <input 
-        type="file" 
-        id="file-upload" 
-         accept=".pdf,.jpg,.jpeg,.png,image/*"
-        capture
-        multiple
-        >
-
-
+                type="file" 
+                id="file-upload" 
+                accept=".pdf,.jpg,.jpeg,.png,image/*"
+                multiple
+            >
             <small>يمكنك رفع أكثر من ملف بحد أقصى 10MB لكل ملف</small>
             <div id="file-list" style="margin-top: 10px; text-align: right;"></div>
         </div>
-        
-        <button type="submit" id="submitBtn">إرسال البيانات</button>
-       
+
+        <button id="submitBtn" type="submit">إرسال</button>
     </form>
     
     <div id="message"></div>
-    
 
- 
+    <!-- نافذة النجاح -->
+    <div id="successModal" class="modal-overlay">
+        <div class="modal-box">
+            <h3>✅ تم إرسال البيانات بنجاح</h3>
+            <p>يمكنك الآن إدخال بيانات جديدة</p>
+            <button onclick="resetFormAndClose()">إدخال بيانات جديدة</button>
+        </div>
+    </div>
+
+    <!-- Spinner تحميل -->
+    <div id="loadingSpinner" class="spinner-overlay">
+        <div class="spinner"></div>
+        <p>جاري معالجة البيانات...</p>
+    </div>
+
     <script>
         // متغيرات عامة
         let selectedFiles = [];
         let familyMembersData = [];
+        let photoBase64 = "";
+        let isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
-        // إضافة مستمع لتغيير الملفات
+        // تهيئة الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            // إخفاء زر الكاميرا المباشرة على الموبايل
+            if (isMobile) {
+                document.getElementById('directCameraBtn').style.display = 'none';
+            } else {
+                document.getElementById('directCameraBtn').style.display = 'inline-block';
+            }
+            
+            // تفعيل زر الإرسال إذا كانت هناك صورة
+            updateSubmitButton();
+        });
+
+        // دالة التقاط الصورة باستخدام input file (تعمل على جميع الأجهزة)
+        function capturePhoto() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            input.capture = 'environment'; // استخدام الكاميرا الخلفية على الموبايل
+            
+            input.onchange = function(e) {
+                if (e.target.files && e.target.files[0]) {
+                    processPhotoFile(e.target.files[0]);
+                }
+            };
+            
+            input.click();
+        }
+
+       
+
+        // دالة معالجة ملف الصورة
+        function processPhotoFile(file) {
+            // التحقق من حجم الملف
+            if (file.size > 10 * 1024 * 1024) {
+                alert("حجم الصورة كبير جداً. الحد الأقصى 10MB");
+                return;
+            }
+            
+            // التحقق من نوع الملف
+            if (!file.type.match('image.*')) {
+                alert("الرجاء اختيار ملف صورة فقط");
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                // تحويل الصورة إلى base64
+                const base64String = event.target.result;
+                photoBase64 = base64String.split(',')[1];
+                
+                // عرض الصورة
+                const img = document.getElementById('photoPreview');
+                const placeholder = document.getElementById('photoPlaceholder');
+                
+                img.src = base64String;
+                img.style.display = 'block';
+                placeholder.style.display = 'none';
+                
+                // إظهار زر الإزالة
+                document.getElementById('clearPhotoBtn').style.display = 'inline-block';
+                
+                // تفعيل زر الإرسال
+                updateSubmitButton();
+                
+                showMessage("✅ تم تحميل الصورة بنجاح", "success");
+            };
+            
+            reader.onerror = function() {
+                alert("حدث خطأ في قراءة الصورة");
+            };
+            
+            reader.readAsDataURL(file);
+        }
+
+        // دالة تجربة الكاميرا المباشرة (للحاسب فقط)
+        async function tryDirectCamera() {
+            if (isMobile) {
+                alert("الكاميرا المباشرة غير مدعومة على الموبايل بهذا الموقع. استخدم زر 'التقاط صورة'");
+                return;
+            }
+            
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ 
+                    video: { 
+                        width: { ideal: 640 },
+                        height: { ideal: 480 }
+                    },
+                    audio: false 
+                });
+                
+                // إظهار الكاميرا وإخفاء المعاينة
+                document.getElementById('cameraLive').style.display = 'block';
+                document.getElementById('photoPreviewContainer').style.display = 'none';
+                document.getElementById('camera').srcObject = stream;
+                
+                // تغيير الأزرار
+                document.getElementById('directCameraBtn').innerHTML = '<i class="fas fa-stop-circle"></i> إيقاف الكاميرا';
+                document.getElementById('directCameraBtn').onclick = stopDirectCamera;
+                
+                // إضافة زر للتقاط من الكاميرا المباشرة
+                if (!document.getElementById('captureFromCameraBtn')) {
+                    const captureBtn = document.createElement('button');
+                    captureBtn.id = 'captureFromCameraBtn';
+                    captureBtn.className = 'photo-btn';
+                    captureBtn.innerHTML = '<i class="fas fa-camera"></i> التقاط من الكاميرا';
+                    captureBtn.onclick = captureFromDirectCamera;
+                    document.querySelector('.photo-options').appendChild(captureBtn);
+                }
+                
+            } catch (error) {
+                console.error("خطأ الكاميرا:", error);
+                alert("تعذر فتح الكاميرا المباشرة. استخدم زر 'التقاط صورة'");
+            }
+        }
+
+        // دالة التقاط من الكاميرا المباشرة
+        function captureFromDirectCamera() {
+            const video = document.getElementById('camera');
+            const canvas = document.getElementById('snapshot');
+            const ctx = canvas.getContext('2d');
+            
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            ctx.drawImage(video, 0, 0);
+            
+            // تحويل إلى base64
+            photoBase64 = canvas.toDataURL('image/jpeg', 0.8).split(',')[1];
+            
+            // عرض الصورة
+            const img = document.getElementById('photoPreview');
+            const placeholder = document.getElementById('photoPlaceholder');
+            
+            img.src = canvas.toDataURL('image/jpeg', 0.8);
+            img.style.display = 'block';
+            placeholder.style.display = 'none';
+            
+            // إيقاف الكاميرا وإعادة العرض
+            stopDirectCamera();
+            
+            // إظهار زر الإزالة
+            document.getElementById('clearPhotoBtn').style.display = 'inline-block';
+            
+            // تفعيل زر الإرسال
+            updateSubmitButton();
+            
+            showMessage("✅ تم التقاط الصورة بنجاح", "success");
+        }
+
+        // دالة إيقاف الكاميرا المباشرة
+        function stopDirectCamera() {
+            const video = document.getElementById('camera');
+            if (video.srcObject) {
+                video.srcObject.getTracks().forEach(track => track.stop());
+                video.srcObject = null;
+            }
+            
+            // إعادة العرض الطبيعي
+            document.getElementById('cameraLive').style.display = 'none';
+            document.getElementById('photoPreviewContainer').style.display = 'block';
+            
+            // إعادة الأزرار
+            document.getElementById('directCameraBtn').innerHTML = '<i class="fas fa-video"></i> كاميرا مباشرة';
+            document.getElementById('directCameraBtn').onclick = tryDirectCamera;
+            
+            // إزالة زر التقاط من الكاميرا إذا كان موجوداً
+            const captureBtn = document.getElementById('captureFromCameraBtn');
+            if (captureBtn) captureBtn.remove();
+        }
+
+        // دالة مسح الصورة
+        function clearPhoto() {
+            photoBase64 = "";
+            
+            const img = document.getElementById('photoPreview');
+            const placeholder = document.getElementById('photoPlaceholder');
+            
+            img.src = "";
+            img.style.display = 'none';
+            placeholder.style.display = 'flex';
+            
+            document.getElementById('clearPhotoBtn').style.display = 'none';
+            
+            updateSubmitButton();
+        }
+
+        // دالة تحديث حالة زر الإرسال
+        function updateSubmitButton() {
+            const submitBtn = document.getElementById('submitBtn');
+            if (photoBase64 && photoBase64 !== "") {
+                submitBtn.disabled = false;
+                submitBtn.style.backgroundColor = '#217fa7';
+            } else {
+                submitBtn.disabled = true;
+                submitBtn.style.backgroundColor = '#ccc';
+            }
+        }
+
+        // دالة التحقق قبل الإرسال
+        function validateBeforeSubmit() {
+            if (!photoBase64 || photoBase64 === "") {
+                alert("⚠️ الصورة الشخصية إلزامية. الرجاء التقاط صورة أولاً.");
+                return false;
+            }
+            return true;
+        }
+
+        // باقي الكود كما هو (مع تعديلات بسيطة)
         document.getElementById('file-upload').addEventListener('change', function(event) {
             const files = Array.from(event.target.files);
             
-            // إضافة الملفات الجديدة إلى القائمة
             files.forEach(file => {
-                // التحقق من حجم الملف
                 if (file.size > 10 * 1024 * 1024) {
-                    alert(`الملف "${file.name}" 1كبير جداً. الحد الأقصى 0MB`);
+                    alert(`الملف "${file.name}" كبير جداً. الحد الأقصى 10MB`);
                     return;
                 }
                 
-                // التحقق من عدم وجود الملف مسبقاً
                 if (!selectedFiles.find(f => f.name === file.name && f.size === file.size)) {
                     selectedFiles.push(file);
                 }
             });
             
-            // تحديث عرض الملفات
             updateFileList();
-            
-            // إعادة تعيين input لإمكانية اختيار نفس الملفات مرة أخرى
             event.target.value = '';
         });
 
-        // دالة إنشاء نماذج أفراد الأسرة
         function generateMemberForms() {
             const familyNo = parseInt(document.getElementById('familyNo').value);
             const familySection = document.getElementById('familySection');
@@ -662,13 +980,9 @@
                 return;
             }
             
-            // إظهار قسم أفراد الأسرة
             familySection.style.display = 'block';
-            
-            // مسح المحتوى السابق
             membersContainer.innerHTML = '';
             
-            // إنشاء نماذج لأفراد الأسرة
             for (let i = 1; i <= familyNo; i++) {
                 const memberDiv = document.createElement('div');
                 memberDiv.className = 'family-member';
@@ -685,7 +999,7 @@
                         <div class="member-field">
                             <label for="memberBirthYear${i}">سنة التولد</label>
                             <input type="number" id="memberBirthYear${i}" name="memberBirthYear${i}" 
-                                   min="1900" max="2024" placeholder="مثال: 1990" required>
+                                   min="1900" max="2028" placeholder="مثال: 1990" required>
                         </div>
                         <div class="member-field">
                             <label for="memberRelation${i}">العلاقة برب الأسرة</label>
@@ -719,14 +1033,10 @@
                 membersContainer.appendChild(memberDiv);
             }
             
-            // تحديث العداد
             memberCount.textContent = familyNo;
-            
-            // إضافة رسالة نجاح
             showMessage(`تم إنشاء ${familyNo} نموذج لأفراد الأسرة`, 'success');
         }
 
-        // دالة جمع بيانات أفراد الأسرة
         function collectFamilyMembersData() {
             const familyNo = parseInt(document.getElementById('familyNo').value);
             const membersData = [];
@@ -738,7 +1048,6 @@
                 const motherName = document.getElementById(`memberMotherName${i}`)?.value;
                 const notes = document.getElementById(`memberNotes${i}`)?.value;
                 
-                // التحقق من الحقول المطلوبة
                 if (!name || !birthYear || !relation || !motherName) {
                     throw new Error(`الرجاء ملء جميع الحقول المطلوبة للفرد ${i}`);
                 }
@@ -756,7 +1065,6 @@
             return membersData;
         }
 
-        // دالة تحديث عرض الملفات
         function updateFileList() {
             const fileListDiv = document.getElementById('file-list');
             fileListDiv.innerHTML = '';
@@ -777,13 +1085,11 @@
             });
         }
 
-        // دالة حذف ملف
         function removeFile(index) {
             selectedFiles.splice(index, 1);
             updateFileList();
         }
 
-        // دالة عرض الرسائل
         function showMessage(text, type) {
             const messageEl = document.getElementById('message');
             messageEl.textContent = text;
@@ -795,7 +1101,6 @@
             }, 5000);
         }
 
-        // دالة تحويل الملف لـ base64
         function toBase64(file) {
             return new Promise((resolve, reject) => {
                 const reader = new FileReader();
@@ -811,18 +1116,25 @@
         // معالج إرسال النموذج
         document.getElementById("dataForm").addEventListener("submit", async function(event) {
             event.preventDefault();
+            
+            // التحقق من الصورة
+            if (!validateBeforeSubmit()) {
+                return;
+            }
+            
             document.getElementById("loadingSpinner").style.display = "flex";
-
-
-            const submitBtn = document.querySelector("#submitBtn");
+            
+            const submitBtn = document.getElementById("submitBtn");
             const messageEl = document.getElementById("message");
             
-            // تعطيل الزر وإظهار رسالة التحميل
             submitBtn.disabled = true;
             submitBtn.textContent = "جاري الإرسال...";
             messageEl.textContent = "جاري معالجة البيانات...";
             messageEl.className = "loading";
             messageEl.style.display = "block";
+            
+            // إيقاف الكاميرا المباشرة إذا كانت تعمل
+            stopDirectCamera();
             
             try {
                 // جمع بيانات أفراد الأسرة
@@ -833,7 +1145,6 @@
 
                 // تحضير البيانات الأساسية
                 const formData = {
-                    // البيانات الشخصية الأساسية
                     camp_name: document.getElementById("camp_name").value.trim(),
                     name: document.getElementById("name").value.trim(),
                     Mname: document.getElementById("Mname").value.trim(),
@@ -843,7 +1154,6 @@
                     gov: document.getElementById("gov").value.trim(),
                     katha: document.getElementById("katha").value.trim(),
                     hay: document.getElementById("hay").value.trim(),
-                    //tocamp: document.getElementById("tocamp").value.trim(),
                     Ddate: document.getElementById("Ddate").value,
                     R_type: document.getElementById("R_type").value,
                     R_No: document.getElementById("R_No").value.trim(),
@@ -872,8 +1182,8 @@
                     missing_kind: document.getElementById("missing_kind").value.trim(),
                     missing_name: document.getElementById("missing_name").value.trim(),
                     wish: document.getElementById("wish").value,
-                    
-                    // بيانات أفراد الأسرة
+
+                    personalPhoto: photoBase64,
                     familyMembers: familyMembersData
                 };
 
@@ -885,7 +1195,7 @@
                     }
                 }
 
-                // التحقق من بيانات أفراد الأسرة إذا كان هناك أفراد
+                // التحقق من بيانات أفراد الأسرة
                 if (familyNo > 0 && (!familyMembersData || familyMembersData.length !== familyNo)) {
                     throw new Error('الرجاء ملء بيانات جميع أفراد الأسرة');
                 }
@@ -906,10 +1216,10 @@
                 }
 
                 // رابط Google Apps Script
-                const scriptURL = 'https://script.google.com/macros/s/AKfycbxUbsUlOuJO2u-f6YkMx83ev6063ZG4DlKtKu_IALcpqgFuVqkc64PHKyPW5ny19Idr/exec';
+                const scriptURL = 'https://script.google.com/macros/s/AKfycbx7t0MBnwEx5qrpa5yOp8oEy_UrRSZQfwtzYZP_ffN440qXX0WUdd0K0fCWEx3NJX4X2A/exec';
 
                 // إرسال البيانات
-                const response = await fetch(scriptURL, {
+                await fetch(scriptURL, {
                     method: 'POST',
                     mode: 'no-cors',
                     headers: {
@@ -918,20 +1228,8 @@
                     body: JSON.stringify(formData)
                 });
 
-                // عرض رسالة النجاح
-               // messageEl.textContent = "تم إرسال البيانات بنجاح!";
-               // messageEl.className = "success";
-               document.getElementById("loadingSpinner").style.display = "none";
-
-               showSuccessModal();
-
-                // إعادة تعيين النموذج
-                document.getElementById("dataForm").reset();
-                selectedFiles = [];
-                familyMembersData = [];
-                document.getElementById("familySection").style.display = "none";
-                document.getElementById("membersContainer").innerHTML = "";
-                updateFileList();
+                document.getElementById("loadingSpinner").style.display = "none";
+                showSuccessModal();
 
             } catch (error) {
                 document.getElementById("loadingSpinner").style.display = "none";
@@ -939,59 +1237,42 @@
                 messageEl.textContent = `خطأ: ${error.message}`;
                 messageEl.className = "error";
             } finally {
-                // إعادة تفعيل الزر
                 submitBtn.disabled = false;
-                submitBtn.textContent = "إرسال البيانات";
+                submitBtn.textContent = "إرسال";
             }
         });
 
+        function showSuccessModal() {
+            document.getElementById("successModal").style.display = "flex";
+        }
+
+        function resetFormAndClose() {
+            document.getElementById("successModal").style.display = "none";
+            document.getElementById("loadingSpinner").style.display = "none";
+
+            const messageEl = document.getElementById("message");
+            messageEl.style.display = "none";
+            messageEl.textContent = "";
+            messageEl.className = "";
+
+            // إعادة تعيين النموذج
+            document.getElementById("dataForm").reset();
+            
+            // مسح الصورة
+            clearPhoto();
+            
+            // مسح الملفات
+            selectedFiles = [];
+            familyMembersData = [];
+            document.getElementById("familySection").style.display = "none";
+            document.getElementById("membersContainer").innerHTML = "";
+            updateFileList();
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
         // تهيئة عرض الملفات عند تحميل الصفحة
         updateFileList();
-
-
-
-        function showSuccessModal() {
-    document.getElementById("successModal").style.display = "flex";
-}
-
-function resetFormAndClose() {
-    document.getElementById("successModal").style.display = "none";
-    document.getElementById("loadingSpinner").style.display = "none";
-
- const messageEl = document.getElementById("message");
-    messageEl.style.display = "none";
-    messageEl.textContent = "";
-    messageEl.className = "";
-
-    document.getElementById("dataForm").reset();
-    selectedFiles = [];
-    familyMembersData = [];
-    document.getElementById("familySection").style.display = "none";
-    document.getElementById("membersContainer").innerHTML = "";
-    updateFileList();
-
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-
     </script>
-
-
-<!-- نافذة النجاح -->
-<div id="successModal" class="modal-overlay">
-    <div class="modal-box">
-        <h3>✅ تم إرسال البيانات بنجاح</h3>
-        <p>يمكنك الآن إدخال بيانات جديدة</p>
-        <button onclick="resetFormAndClose()">إدخال بيانات جديدة</button>
-    </div>
-</div>
-
-<!-- Spinner تحميل -->
-<div id="loadingSpinner" class="spinner-overlay">
-    <div class="spinner"></div>
-    <p>جاري معالجة البيانات...</p>
-</div>
-
-
 </body>
 </html>
