@@ -1210,14 +1210,13 @@
                  const API_URL = 'https://camp-survey-worker.disability-erbil.workers.dev/';  
                               
                 // إرسال البيانات
-                await fetch(scriptURL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(formData)
-                });
+                 const response = await fetch(API_URL, {
+              method: 'POST',
+             headers: {
+                  'Content-Type': 'application/json',
+                      },
+                         body: JSON.stringify(formData)
+                            });
 
                 document.getElementById("loadingSpinner").style.display = "none";
                 showSuccessModal();
