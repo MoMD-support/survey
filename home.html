@@ -409,7 +409,7 @@
             margin-top: 5px;
         }
         
-        /* كاميرا مباشرة - للحواسب فقط */
+        /* كاميرا مباشرة - للحواسيبي فقط */
         .camera-live {
             display: none;
         }
@@ -804,7 +804,7 @@
             reader.readAsDataURL(file);
         }
 
-        // دالة تجربة الكاميرا المباشرة (للحاسب فقط)
+        // دالة تجربة الكاميرا المباشرة (للحاسبة فقط)
         async function tryDirectCamera() {
             if (isMobile) {
                 alert("الكاميرا المباشرة غير مدعومة على الموبايل بهذا الموقع. استخدم زر 'التقاط صورة'");
@@ -936,7 +936,7 @@
             return true;
         }
 
-        // باقي الكود كما هو (مع تعديلات بسيطة)
+        
         document.getElementById('file-upload').addEventListener('change', function(event) {
             const files = Array.from(event.target.files);
             
@@ -1205,8 +1205,7 @@
                     }
                 }
 
-                // رابط Google Apps Script
-                //const scriptURL = 'https://script.google.com/macros/s/AKfycbx6Zx1ykdr7oOFUVUV3pgAUS2Qo8RT1R0dT9EVH3rBPpf1hcVPvN0yNELBi2ccCTuaFhA/exec';
+                
                  const API_URL = 'https://camp-survey-worker.disability-erbil.workers.dev/';  
                               
                 // إرسال البيانات
